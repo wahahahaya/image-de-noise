@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import torchvision.models as models
 
 
 class DoubleConv(nn.Module):
@@ -267,7 +268,7 @@ class VGG19_fea(nn.Module):
 
 if __name__ == "__main__":
    device = "cuda" if torch.cuda.is_available() else "cpu"
-   x = torch.randn(1 ,1, 256, 256).to(device)
-   model = Encoder().to(device)
+   x = torch.randn(1 ,3, 256, 256).to(device)
+   model = VGG19_fea().to(device)
    dec = Decoder_AWGN().to(device)
-   print(dec(model(x)[1]).shape)
+   print(model(x).shape)
