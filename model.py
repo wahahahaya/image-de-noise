@@ -245,6 +245,32 @@ class Dis(nn.Module):
         return self.dis(x)
 
 
+class dis_denoise(nn.Module):
+    def __init__(self):
+        super(dis_denoise, self).__init__()
+        self.dis = Dis()
+
+    def forward(self, x):
+        return self.dis(x)
+
+
+class dis_SP(nn.Module):
+    def __init__(self):
+        super(dis_SP, self).__init__()
+        self.dis = Dis()
+
+    def forward(self, x):
+        return self.dis(x)
+
+
+class dis_AWGN(nn.Module):
+    def __init__(self):
+        super(dis_AWGN, self).__init__()
+        self.dis = Dis()
+
+    def forward(self, x):
+        return self.dis(x)
+
 class VGG19_fea(nn.Module):
     def __init__(self):
         super(VGG19_fea, self).__init__()
@@ -268,7 +294,7 @@ class VGG19_fea(nn.Module):
 
 if __name__ == "__main__":
    device = "cuda" if torch.cuda.is_available() else "cpu"
-   x = torch.randn(1 ,3, 256, 256).to(device)
+   x = torch.randn(3 ,1, 256, 256).to(device)
    model = VGG19_fea().to(device)
    dec = Decoder_AWGN().to(device)
    print(model(x).shape)
